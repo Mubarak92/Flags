@@ -8,21 +8,24 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.flags.databinding.FragmentFlagBinding
 
-class OverviewFragment : Fragment() {
+class FlagFragment : Fragment() {
 
-    private val viewModel: FlagViewModel by viewModels()
+    private val flagViewModel: FlagViewModel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = FragmentFlagBinding.inflate(inflater)
+
         binding.lifecycleOwner = this
-        binding.viewModel = viewModel
 
+        binding.flagViewModel = flagViewModel
+        binding.recyclerView.adapter = FlagGridAdapter()
         return binding.root
-    }
 
+    }
 
 }

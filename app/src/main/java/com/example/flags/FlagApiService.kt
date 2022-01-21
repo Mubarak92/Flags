@@ -10,18 +10,14 @@ import java.util.*
 
 private const val BASE_URL = "https://countriesnow.space/api/v0.1/countries/flag/"
 
-private val moshi = Moshi.Builder()
-    .add(KotlinJsonAdapterFactory())
-    .build()
+private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
 
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
-    .baseUrl(BASE_URL)
-    .build()
-
+    .baseUrl(BASE_URL).build()
 interface FlagApiService {
     @GET("images")
-    suspend fun getImages(): FlagResponse<FlagsData>
+    suspend fun getImages(): FlagResponse
 }
 
 object FlagsApi {

@@ -9,19 +9,21 @@ import kotlinx.coroutines.launch
 import java.lang.Exception
 
 class FlagViewModel: ViewModel() {
-    private val _status = MutableLiveData<String>()
-    val status: LiveData<String> = _status
+     val country = MutableLiveData<String>()
+     var countryPhotos = MutableLiveData<List<FlagsData>>()
+
     init {
         flagPhotos()
     }
     private fun flagPhotos(){
+
         viewModelScope.launch{
             try {
-                val listResult = FlagsApi.retrofitService.getImages()
-                _status.value = "Success ${listResult.data.size}"
+                countryPhotos.value = FlagsApi.retrofitService.getImages().data
+                country.value = "Success"
 
             }catch (e: Exception){
-                _status.value = "Fail ${e.message}"
+                country.value = "Fail ${e.message}"
             }
         }
     }
